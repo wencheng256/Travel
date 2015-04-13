@@ -2,7 +2,6 @@ package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,7 +15,6 @@ public class Mysql {
 	
 	private Connection connection;
 	private Statement statement;
-	private PreparedStatement delete;
 	
 	//获得JDBC Mysql连接
 	private Mysql()
@@ -27,7 +25,6 @@ public class Mysql {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection=DriverManager.getConnection(url, "root", "abc123");
 			statement=connection.createStatement();
-			delete=connection.prepareStatement("DELETE FROM ? WHERE ID = ?");
 		} catch (ClassNotFoundException e) {
 			// TODO 自动生成的 catch 块
 			Logger.getLogger("travel").warning(e.getMessage());
@@ -90,25 +87,17 @@ public class Mysql {
 	
 	public boolean delete(String table,int id)
 	{
-		try {
-			delete.setString(1,table);
-			delete.setInt(2, id);
-			return delete.execute();
-		} catch (SQLException e) {
-			// TODO 自动生成的 catch 块
-			Logger.getLogger("travel").warning(e.getMessage());
-			e.printStackTrace();
-			return false;
-		}
+		String sql="DELETE FROM "+table+" WHERE id ="+id;
+		return mysql.execute(sql);
 	}
 	
 //	单元测试之用
-//	public static void main(String[] args) {
-//		// TODO 自动生成的方法存根
-//		Mysql mysql=Mysql.getInstance();
-//		String sql="SELECT * from user";
-//		mysql.query(sql);
-//	}
-//	
+	public static void main(String[] args) {
+		// TODO 自动生成的方法存根
+		Mysql mysql=Mysql.getInstance();
+		String sql="SELECT * from user";
+		mysql.query(sql);
+	}
+	
 
 }

@@ -28,6 +28,15 @@ public class Adv implements Sqlable {
 		this.loc=loc;
 		this.link=link;
 	}
+	public Adv(int id,String name,String image,String loc,String link)
+	{
+		this();
+		this.id=id;
+		this.name=name;
+		this.image=image;
+		this.loc=loc;
+		this.link=link;
+	}
 
 	@Override
 	public boolean insert() {
@@ -96,5 +105,13 @@ public class Adv implements Sqlable {
 	public void setLink(String link) {
 		this.link = link;
 	}
+	
+	//单元测试
+	public static void main(String[] args) {
+	// TODO 自动生成的方法存根
+		Adv adv1=new Adv(1,"主页轮播图2","1122", "11", "11");
+		adv1.delete();
+	}
+
 
 }
