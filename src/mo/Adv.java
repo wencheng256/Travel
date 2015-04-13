@@ -63,7 +63,19 @@ public class Adv implements Sqlable {
 			return false;
 		return mysql.delete("adv", id);
 	}
-
+	public boolean delete(int id) {
+		// TODO 自动生成的方法存根
+		if(id<=0)
+			return false;
+		return mysql.delete("adv", id);
+	}
+	@Override
+	public boolean truncate() {
+		// TODO 自动生成的方法存根
+		String sql="TRUNCATE table adv";
+		return mysql.equals(sql);
+	}
+	
 	
 //Getter and Setter	
 	public int getId() {
@@ -112,6 +124,5 @@ public class Adv implements Sqlable {
 		Adv adv1=new Adv(1,"主页轮播图2","1122", "11", "11");
 		adv1.delete();
 	}
-
 
 }
