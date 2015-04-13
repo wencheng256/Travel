@@ -121,8 +121,8 @@ public class Adv implements Sqlable {
 	//单元测试
 	public static void main(String[] args) {
 	// TODO 自动生成的方法存根
-		Adv adv1=new Adv(1,"主页轮播图2","1122", "11", "11");
-		adv1.delete();
+		Adv test=new Adv(1,"主页轮播图2","1122", "11", "11");
+		test.delete();
 	}
 
 }
