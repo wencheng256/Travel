@@ -21,12 +21,16 @@ public class City implements Sqlable {
 		this();
 		this.id=id;
 	}
-	public City(int id,String name,int province)
+	public City(String name,int province)
 	{
 		this();
-		this.id=id;
 		this.name=name;
 		this.province=province;
+	}
+	public City(int id,String name,int province)
+	{
+		this(name,province);
+		this.id=id;
 	}
 	
 	
