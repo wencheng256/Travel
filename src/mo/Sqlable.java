@@ -1,5 +1,7 @@
 package mo;
 
+import java.util.Iterator;
+
 
 public interface Sqlable {
 	abstract public boolean insert();
@@ -7,4 +9,7 @@ public interface Sqlable {
 	abstract public boolean delete();
 	abstract public boolean delete(int id);
 	abstract public boolean truncate();
+	abstract public Iterator selectAll();
+	abstract public Sqlable selectedId(int id);
+	abstract public Iterator selectSql(String where);
 }

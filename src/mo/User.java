@@ -1,5 +1,7 @@
 package mo;
 
+import java.util.Iterator;
+
 import db.Mysql;
 
 public class User implements Sqlable {
@@ -115,11 +117,27 @@ public class User implements Sqlable {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	//select方法
+	@Override
+	public Iterator selectAll() {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+	@Override
+	public Sqlable selectedId(int id) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+	@Override
+	public Iterator selectSql(String where) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
 	//单元测试
 	public static void main(String[] args) {
 	// TODO 自动生成的方法存根
-		User test1=new User(2,"wencheng256","韩文程1111", ",wk5201314", "18369189857", "wencheng256@gmail.com");
-		System.out.println(test1.update());
+		User test1=new User(5,"wencheng258","韩文程111222", ",wk5201314", "18369189857", "wencheng256@gmail.com");
+		System.out.println(test1.delete());
 	}
-
 }
