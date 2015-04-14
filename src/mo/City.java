@@ -99,7 +99,10 @@ public class City implements Sqlable {
 	}
 	
 	//单元测试
+	//单元测试
 	public static void main(String[] args) {
 	// TODO 自动生成的方法存根
+		City test1=new City(2,"济宁",2);
+		System.out.println(test1.update());
 	}
 }
