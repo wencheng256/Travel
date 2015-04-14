@@ -118,8 +118,8 @@ public class User implements Sqlable {
 	//单元测试
 	public static void main(String[] args) {
 	// TODO 自动生成的方法存根
-		User test1=new User(1,"wencheng256","韩文程111", ",wk5201314", "18369189857", "wencheng256@gmail.com");
-		System.out.println(test1.truncate());
+		User test1=new User(2,"wencheng256","韩文程1111", ",wk5201314", "18369189857", "wencheng256@gmail.com");
+		System.out.println(test1.update());
 	}
 
 }

@@ -63,7 +63,8 @@ public class Mysql {
 	public boolean execute(String sql)
 	{
 		try {
-			return statement.execute(sql);
+			statement.execute(sql);
+			return true;
 		} catch (SQLException e) {
 			// TODO 自动生成的 catch 块
 			Logger.getLogger("travel").warning(e.getMessage());
