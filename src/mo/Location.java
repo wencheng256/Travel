@@ -50,7 +50,9 @@ public class Location implements Sqlable {
 	@Override
 	public boolean delete() {
 		// TODO 自动生成的方法存根
-		return false;
+		if(id<=0)
+			return false;
+		return mysql.delete("location", id);
 	}
 
 	@Override
@@ -84,8 +86,8 @@ public class Location implements Sqlable {
 	//单元测试
 	public static void main(String[] args) {
 	// TODO 自动生成的方法存根
-		Location test1=new Location("华北");
-		System.out.println(test1.insert());
+		Location test1=new Location(1,"华北");
+		System.out.println(test1.truncate());
 	}
 
 }
