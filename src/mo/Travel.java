@@ -1,5 +1,11 @@
 package mo;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.logging.Logger;
+
 import db.Mysql;
 
 public class Travel implements Sqlable {
@@ -157,12 +163,159 @@ public class Travel implements Sqlable {
 	public void setSeller(int seller) {
 		this.seller = seller;
 	}
-
+	//select 语句
+	@Override
+	public Iterator<Travel> selectAll() {
+		// TODO 自动生成的方法存根
+		String sql="select id,name,tip,price,image,content,label,city,seller from travel";
+		ResultSet rs=mysql.query(sql);
+		LinkedList<Travel> list=new LinkedList<Travel>();	
+		try {
+			while(rs.next())
+			{
+				Travel travel=new Travel();
+				travel.setId(rs.getInt(1));
+				travel.setName(rs.getString(2));
+				travel.setTip(rs.getString(3));
+				travel.setPrice(rs.getInt(4));
+				travel.setImage(rs.getString(5));
+				travel.setContent(rs.getString(6));
+				travel.setLabel(rs.getString(7));
+				travel.setCity(rs.getInt(8));
+				travel.setSeller(rs.getInt(9));
+				
+				
+				list.add(travel);
+			}
+			return list.iterator();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			Logger.getLogger("travel").warning(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+	@Override
+	public Travel selectedId(int id) {
+		// TODO 自动生成的方法存根
+		String sql="select id,name,tip,price,image,content,label,city,seller from travel where id="+id;
+		ResultSet rs=mysql.query(sql);
+		try {
+			if(rs.next())
+			{
+				Travel travel=new Travel();
+				travel.setId(rs.getInt(1));
+				travel.setName(rs.getString(2));
+				travel.setTip(rs.getString(3));
+				travel.setPrice(rs.getInt(4));
+				travel.setImage(rs.getString(5));
+				travel.setContent(rs.getString(6));
+				travel.setLabel(rs.getString(7));
+				travel.setCity(rs.getInt(8));
+				travel.setSeller(rs.getInt(9));
+				
+				return travel;
+			}
+			return null;
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			Logger.getLogger("travel").warning(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+	@Override
+	public Iterator<Travel> selectSql(String where) {
+		// TODO 自动生成的方法存根
+		String sql="select id,name,tip,price,image,content,label,city,seller from travel where id where "+where;
+		ResultSet rs=mysql.query(sql);
+		LinkedList<Travel> list=new LinkedList<Travel>();	
+		try {
+			while(rs.next())
+			{
+				Travel travel=new Travel();
+				travel.setId(rs.getInt(1));
+				travel.setName(rs.getString(2));
+				travel.setTip(rs.getString(3));
+				travel.setPrice(rs.getInt(4));
+				travel.setImage(rs.getString(5));
+				travel.setContent(rs.getString(6));
+				travel.setLabel(rs.getString(7));
+				travel.setCity(rs.getInt(8));
+				travel.setSeller(rs.getInt(9));
+				
+				list.add(travel);
+			}
+			return list.iterator();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			Logger.getLogger("travel").warning(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public Iterator<Travel> selectCity(int city)
+	{
+		String sql="select id,name,tip,price,image,content,label,city,seller from travel where city = "+city+"";
+		ResultSet rs=mysql.query(sql);
+		LinkedList<Travel> list=new LinkedList<Travel>();	
+		try {
+			while(rs.next())
+			{
+				Travel travel=new Travel();
+				travel.setId(rs.getInt(1));
+				travel.setName(rs.getString(2));
+				travel.setTip(rs.getString(3));
+				travel.setPrice(rs.getInt(4));
+				travel.setImage(rs.getString(5));
+				travel.setContent(rs.getString(6));
+				travel.setLabel(rs.getString(7));
+				travel.setCity(rs.getInt(8));
+				travel.setSeller(rs.getInt(9));
+				
+				list.add(travel);
+			}
+			return list.iterator();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			Logger.getLogger("travel").warning(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public Iterator<Travel> searchLabel(String label)
+	{
+		String sql="select id,name,tip,price,image,content,label,city,seller from travel where label like %"+label+"%";
+		ResultSet rs=mysql.query(sql);
+		LinkedList<Travel> list=new LinkedList<Travel>();	
+		try {
+			while(rs.next())
+			{
+				Travel travel=new Travel();
+				travel.setId(rs.getInt(1));
+				travel.setName(rs.getString(2));
+				travel.setTip(rs.getString(3));
+				travel.setPrice(rs.getInt(4));
+				travel.setImage(rs.getString(5));
+				travel.setContent(rs.getString(6));
+				travel.setLabel(rs.getString(7));
+				travel.setCity(rs.getInt(8));
+				travel.setSeller(rs.getInt(9));
+				
+				list.add(travel);
+			}
+			return list.iterator();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			Logger.getLogger("travel").warning(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	//单元测试
 	public static void main(String[] args) {
 	// TODO 自动生成的方法存根
-		User test1=new User(5,"wencheng258","韩文程111222", ",wk5201314", "18369189857", "wencheng256@gmail.com");
-		System.out.println(test1.delete());
 	}
 }
