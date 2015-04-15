@@ -126,7 +126,7 @@ public class Adv implements Sqlable {
 	
 	//selected方法
 	@Override
-	public Iterator selectAll() {
+	public Iterator<Adv> selectAll() {
 		// TODO 自动生成的方法存根
 		String sql="select id,name,image,loc,link from adv";
 		ResultSet rs=mysql.query(sql);
@@ -152,7 +152,7 @@ public class Adv implements Sqlable {
 		}
 	}
 	@Override
-	public Sqlable selectedId(int id) {
+	public Adv selectedId(int id) {
 		// TODO 自动生成的方法存根
 		String sql="select id,name,image,loc,link from adv where id="+id;
 		ResultSet rs=mysql.query(sql);
@@ -176,7 +176,7 @@ public class Adv implements Sqlable {
 		}
 	}
 	@Override
-	public Iterator selectSql(String where) {
+	public Iterator<Adv> selectSql(String where) {
 		// TODO 自动生成的方法存根
 		String sql="select id,name,image,loc,link from adv where "+where;
 		ResultSet rs=mysql.query(sql);
@@ -206,7 +206,7 @@ public class Adv implements Sqlable {
 	public static void main(String[] args) {
 	// TODO 自动生成的方法存根
 		Adv test=new Adv(1,"主页轮播图3","1122", "11", "11");
-		System.out.println(((Adv)test.selectAll().next()).getName());
+		System.out.println(test.selectAll().next().getName());
 	}
 
 }

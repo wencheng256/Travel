@@ -124,7 +124,7 @@ public class User implements Sqlable {
 	
 	//select方法
 	@Override
-	public Iterator selectAll() {
+	public Iterator<User> selectAll() {
 		// TODO 自动生成的方法存根
 		String sql="select id,name,realname,password,phonenum,postbox from user";
 		ResultSet rs=mysql.query(sql);
@@ -151,7 +151,7 @@ public class User implements Sqlable {
 		}
 	}
 	@Override
-	public Sqlable selectedId(int id) {
+	public User selectedId(int id) {
 		// TODO 自动生成的方法存根
 		String sql="select id,name,realname,password,phonenum,postbox from user where id="+id;
 		ResultSet rs=mysql.query(sql);
@@ -177,7 +177,7 @@ public class User implements Sqlable {
 		}
 	}
 	@Override
-	public Iterator selectSql(String where) {
+	public Iterator<User> selectSql(String where) {
 		// TODO 自动生成的方法存根
 		String sql="select id,name,realname,password,phonenum,postbox from user where "+where;
 		ResultSet rs=mysql.query(sql);
