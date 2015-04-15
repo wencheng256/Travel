@@ -1,6 +1,10 @@
 package mo;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.logging.Logger;
 
 import db.Mysql;
 
@@ -122,22 +126,113 @@ public class User implements Sqlable {
 	@Override
 	public Iterator selectAll() {
 		// TODO 自动生成的方法存根
-		return null;
+		String sql="select id,name,realname,password,phonenum,postbox from user";
+		ResultSet rs=mysql.query(sql);
+		LinkedList<User> list=new LinkedList<User>();	
+		try {
+			while(rs.next())
+			{
+				User user=new User();
+				user.setId(rs.getInt(1));
+				user.setName(rs.getString(2));
+				user.setRealname(rs.getString(3));
+				user.setPassword(rs.getString(4));
+				user.setPhonenum(rs.getString(5));
+				user.setPostbox(rs.getString(6));
+				
+				list.add(user);
+			}
+			return list.iterator();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			Logger.getLogger("travel").warning(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
 	}
 	@Override
 	public Sqlable selectedId(int id) {
 		// TODO 自动生成的方法存根
-		return null;
+		String sql="select id,name,realname,password,phonenum,postbox from user where id="+id;
+		ResultSet rs=mysql.query(sql);
+		try {
+			if(rs.next())
+			{
+				User user=new User();
+				user.setId(rs.getInt(1));
+				user.setName(rs.getString(2));
+				user.setRealname(rs.getString(3));
+				user.setPassword(rs.getString(4));
+				user.setPhonenum(rs.getString(5));
+				user.setPostbox(rs.getString(6));
+				
+				return user;
+			}
+			return null;
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			Logger.getLogger("travel").warning(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
 	}
 	@Override
 	public Iterator selectSql(String where) {
 		// TODO 自动生成的方法存根
-		return null;
+		String sql="select id,name,realname,password,phonenum,postbox from user where "+where;
+		ResultSet rs=mysql.query(sql);
+		LinkedList<User> list=new LinkedList<User>();	
+		try {
+			while(rs.next())
+			{
+				User user=new User();
+				user.setId(rs.getInt(1));
+				user.setName(rs.getString(2));
+				user.setRealname(rs.getString(3));
+				user.setPassword(rs.getString(4));
+				user.setPhonenum(rs.getString(5));
+				user.setPostbox(rs.getString(6));
+				
+				list.add(user);
+			}
+			return list.iterator();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			Logger.getLogger("travel").warning(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+	//用户表验证用户名密码
+	public User Authenticator(String username,String pass)
+	{
+		String sql="select id,name,realname,password,phonenum,postbox from user where name='"+username+"' AND password='"+pass+"'";
+		ResultSet rs=mysql.query(sql);
+		try {
+			if(rs.next())
+			{
+				User user=new User();
+				user.setId(rs.getInt(1));
+				user.setName(rs.getString(2));
+				user.setRealname(rs.getString(3));
+				user.setPassword(rs.getString(4));
+				user.setPhonenum(rs.getString(5));
+				user.setPostbox(rs.getString(6));
+				
+				return user;
+			}
+			return null;
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			Logger.getLogger("travel").warning(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
 	}
 	//单元测试
 	public static void main(String[] args) {
 	// TODO 自动生成的方法存根
 		User test1=new User(5,"wencheng258","韩文程111222", ",wk5201314", "18369189857", "wencheng256@gmail.com");
-		System.out.println(test1.delete());
+		System.out.println(((User)test1.Authenticator("wencheng256", ",wk5201314")).getPassword());
 	}
 }
