@@ -11,11 +11,13 @@ import db.Mysql;
 public class Adv implements Sqlable {
 	
 	private Mysql mysql;
+	
 	private int id;
 	private String name;
 	private String image;
 	private String loc;
 	private String link;
+	private String lalala;
 	
 	public Adv()
 	{
