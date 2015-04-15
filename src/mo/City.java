@@ -108,7 +108,7 @@ public class City implements Sqlable {
 	@Override
 	public Iterator<City> selectAll() {
 		// TODO 自动生成的方法存根
-		String sql="select name,province from city";
+		String sql="select id,name,province from city";
 		ResultSet rs=mysql.query(sql);
 		LinkedList<City> list=new LinkedList<City>();	
 		try {
@@ -117,6 +117,7 @@ public class City implements Sqlable {
 				City city=new City();
 				city.setId(rs.getInt(1));
 				city.setName(rs.getString(2));
+				city.setProvince(rs.getInt(3));
 				
 				list.add(city);
 			}
@@ -131,19 +132,55 @@ public class City implements Sqlable {
 	@Override
 	public City selectedId(int id) {
 		// TODO 自动生成的方法存根
-		return null;
+		String sql="select id,name,province from city where id="+id;
+		ResultSet rs=mysql.query(sql);
+		try {
+			if(rs.next())
+			{
+				City city=new City();
+				city.setId(rs.getInt(1));
+				city.setName(rs.getString(2));
+				city.setProvince(rs.getInt(3));
+				
+				return city;
+			}
+			return null;
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			Logger.getLogger("travel").warning(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
 	}
-
 	@Override
 	public Iterator<City> selectSql(String where) {
 		// TODO 自动生成的方法存根
-		return null;
+		String sql="id,name,province from city where "+where;
+		ResultSet rs=mysql.query(sql);
+		LinkedList<City> list=new LinkedList<City>();	
+		try {
+			while(rs.next())
+			{
+				City city=new City();
+				city.setId(rs.getInt(1));
+				city.setName(rs.getString(2));
+				city.setProvince(rs.getInt(3));
+				
+				list.add(city);
+			}
+			return list.iterator();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			Logger.getLogger("travel").warning(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
 	}
 	//单元测试
 	public static void main(String[] args) {
 	// TODO 自动生成的方法存根
 		City test1=new City(2,"济宁",2);
-		System.out.println(test1.update());
+		System.out.println(test1.selectAll().next().getName());
 	}
 
 }
