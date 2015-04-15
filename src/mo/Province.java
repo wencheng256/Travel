@@ -1,5 +1,11 @@
 package mo;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.logging.Logger;
+
 import db.Mysql;
 
 public class Province implements Sqlable {
@@ -95,11 +101,82 @@ public class Province implements Sqlable {
 	public void setId(int id) {
 		this.id = id;
 	}
+	@Override
+	public Iterator<Province> selectAll() {
+		// TODO 自动生成的方法存根
+		String sql="select id,name,location from province";
+		ResultSet rs=mysql.query(sql);
+		LinkedList<Province> list=new LinkedList<Province>();	
+		try {
+			while(rs.next())
+			{
+				Province province=new Province();
+				province.setId(rs.getInt(1));
+				province.setName(rs.getString(2));
+				province.setLocation(rs.getInt(3));
+				
+				list.add(province);
+			}
+			return list.iterator();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			Logger.getLogger("travel").warning(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+	@Override
+	public Province selectedId(int id) {
+		// TODO 自动生成的方法存根
+		String sql="select id,name,location from province where id="+id;
+		ResultSet rs=mysql.query(sql);
+		try {
+			if(rs.next())
+			{
+				Province province=new Province();
+				province.setId(rs.getInt(1));
+				province.setName(rs.getString(2));
+				province.setLocation(rs.getInt(3));
+				
+				return province;
+			}
+			return null;
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			Logger.getLogger("travel").warning(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+	@Override
+	public Iterator<Province> selectSql(String where) {
+		// TODO 自动生成的方法存根
+		String sql="select id,name,location from province where "+where;
+		ResultSet rs=mysql.query(sql);
+		LinkedList<Province> list=new LinkedList<Province>();	
+		try {
+			while(rs.next())
+			{
+				Province province=new Province();
+				province.setId(rs.getInt(1));
+				province.setName(rs.getString(2));
+				province.setLocation(rs.getInt(3));
+				
+				list.add(province);
+			}
+			return list.iterator();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			Logger.getLogger("travel").warning(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	//单元测试
 	public static void main(String[] args) {
 	// TODO 自动生成的方法存根
 		Province test1=new Province(2,"河北",3);
-		System.out.println(test1.insert());
+		System.out.println(test1.selectSql("id=2").next().getName());
 	}
 }
